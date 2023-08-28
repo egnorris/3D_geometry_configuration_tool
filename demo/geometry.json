@@ -1,0 +1,33 @@
+
+    [	
+        {
+            "shape": "Rectangle",
+            "radius": 1e-9,
+            "length": 50e-9,
+            "width": 100e-9,
+            "thickness": 30e-9,
+            "material": "gold",
+            "position": [201.4, 101.1, 249.1]
+        },
+
+        {
+            "shape": "Triangle",
+            "radius": 1e-9,
+            "length": 100e-9,
+            "width": 100e-9,
+            "thickness": 30e-9,
+            "material": "gold",
+            "position": [201.4, 101.1, 324.6]
+        },
+
+        {
+            "shape": "Triangle",
+            "radius": 1e-9,
+            "length": 50e-9,
+            "width": 100e-9,
+            "thickness": 30e-9,
+            "material": "air",
+            "position": [200.8, 101.5, 249.1]
+        }
+        
+    ]
