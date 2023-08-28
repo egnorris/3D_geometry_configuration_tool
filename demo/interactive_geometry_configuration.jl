@@ -161,9 +161,9 @@ for k = 1:length(geometry)
     L = geometry[k]["length"] * config["scaling_factor"]    #length, along Z
     W = geometry[k]["width"] * config["scaling_factor"]     #width, along x
     x0, y0, z0 = geometry[k]["position"]
-    x_slider = Slider(fig[2+(k-1), 1], range = x_domain, startvalue = x0)
-    y_slider = Slider(fig[2+(k-1), 2], range = y_domain, startvalue = y0)
-    z_slider = Slider(fig[2+(k-1), 3], range = z_domain, startvalue = z0)
+    x_slider = Slider(fig[2+(length(geometry)-k), 1], range = x_domain, startvalue = x0)
+    y_slider = Slider(fig[2+(length(geometry)-k), 2], range = y_domain, startvalue = y0)
+    z_slider = Slider(fig[2+(length(geometry)-k), 3], range = z_domain, startvalue = z0)
     
     X = x_slider.value
     Y = y_slider.value
