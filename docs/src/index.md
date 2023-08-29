@@ -8,5 +8,11 @@ CurrentModule = geometry_configuration
 ```
 
 ```@docs
-load_geometry()
+load_JSON()
+get_vertices(x1_coordinate_slider, x2_coordinate_slider, plane, L, W, T, R, shape)
+set_plane(plane, L, W, T)
+rectangle_vertices(x1_coordinate_slider, x2_coordinate_slider, plane, L, W, T)
+triangle_vertices(x1_coordinate_slider, x2_coordinate_slider, W, L)
+circle_vertices(x1_coordinate_slider, x2_coordinate_slider, R) 
+place_shape(x1_coordinate_slider, x2_coordinate_slider, plane, L, W, T, R, shape)
 ```
