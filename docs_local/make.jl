@@ -7,3 +7,5 @@ makedocs(
          pages=[
                 "About" => "index.md",
                ])
+
+cp("../docs_local/build","../docs",force=true)
