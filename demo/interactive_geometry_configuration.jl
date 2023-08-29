@@ -1,6 +1,12 @@
 using GLMakie
 using JSON
 
+
+function load_JSON()
+    return [open(JSON.parse, "geometry.json"), open(JSON.parse, "configuration.json")]
+end
+    
+
 function get_vertices(x1_coordinate_slider, x2_coordinate_slider, plane, L, W, T, R, shape)
     if shape == "Rectangle"
         return rectangle_vertices(x1_coordinate_slider, x2_coordinate_slider, plane, L, W, T)
