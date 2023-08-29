@@ -53,10 +53,9 @@ end
 function triangle_vertices(x1_coordinate_slider, x2_coordinate_slider, W, L)
     vertices = lift(x1_coordinate_slider.value, x2_coordinate_slider.value) do x1, x2
         [
-            Point2f(x1 + W, x2 + L),
+            Point2f(x1, x2 + L),
             Point2f(x1 + W, x2 - L),
-            Point2f(x1 - W, x2 - L),
-            Point2f(x1 - W, x2 + L)
+            Point2f(x1 - W, x2 - L)
         ]
     end
     return vertices
@@ -82,11 +81,11 @@ end
 
         
 
-config = load_configuration()[1]
+geometry, config = load_JSON()
+config = config[1]
 x_domain = 0:0.1:config["x_span"]
 z_domain = 0:0.1:config["z_span"]
 y_domain = 0:0.1:config["y_span"]
-geometry = load_geometry()
 fig = Figure()
 
 for k = 1:length(geometry)
