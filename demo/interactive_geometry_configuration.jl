@@ -1,3 +1,6 @@
+import Pkg
+Pkg.add("GLMakie")
+Pkg.add("JSON")
 using GLMakie
 using JSON
 
