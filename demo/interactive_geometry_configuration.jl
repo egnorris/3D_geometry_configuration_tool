@@ -86,9 +86,10 @@ end
 
 geometry, config = load_JSON()
 config = config[1]
-x_domain = 0:0.1:config["x_span"]
-z_domain = 0:0.1:config["z_span"]
-y_domain = 0:0.1:config["y_span"]
+x_domain = 0:0.01:config["x_span"]
+#z_domain = 400:0.01:600
+z_domain = 0:0.01:config["z_span"]
+y_domain = 0:0.01:config["y_span"]
 fig = Figure()
 
 for k = 1:length(geometry)
@@ -107,16 +108,16 @@ for k = 1:length(geometry)
     z_slider = Slider(fig[2+(length(geometry)-k), 3], range = z_domain, startvalue = z0)
 
     #pull data from the sliders to update shape positions in the figures
-    xy_center_coordinates, xy_vertice_coordinates, X_coordinate_string, Y_coordinate_string = place_shape(x_slider, y_slider, "xy", L, W, T, R, geometry[k]["shape"])
-    xz_center_coordinates, xz_vertice_coordinates, _, Z_coordinate_string = place_shape(x_slider, z_slider, "xz", L, W, T, R, geometry[k]["shape"])
-    yz_center_coordinates, yz_vertice_coordinates, _, _ = place_shape(y_slider, z_slider, "yz", L, W, T, R, geometry[k]["shape"])
+    xy_center_coordinates, xy_vertice_coordinates, X_coordinate_string, Y_coordinate_string = place_shape(x_slider, y_slider, "xy", L/2, W/2, T/2, R, geometry[k]["shape"])
+    xz_center_coordinates, xz_vertice_coordinates, _, Z_coordinate_string = place_shape(x_slider, z_slider, "xz", L/2, W/2, T/2, R, geometry[k]["shape"])
+    yz_center_coordinates, yz_vertice_coordinates, _, _ = place_shape(y_slider, z_slider, "yz", L/2, W/2, T/2, R, geometry[k]["shape"])
 
     #set the color of the shape based on the material, for now only air gets a different color
     c = (:red, 0.5)
     if geometry[k]["material"] == "air"
         c = (:blue, 0.5)
     end
-    
+    """
     #define Axis for XY window with aspect ratio defined by domain size
     ax1 = Axis(fig[1, 1], xlabel = "X Slider", title = "XY - Plane", aspect = x_domain[end] / y_domain[end])
 
@@ -126,9 +127,10 @@ for k = 1:length(geometry)
     scatter!(xy_center_coordinates)
     #set window axis limis
     limits!(ax1, 1, x_domain[end], 1, y_domain[end])
-    
+    """
     #define Axis for XZ window with aspect ratio defined by domain size
-    ax2 = Axis(fig[1, 2], xlabel = "Y Slider", title = "XZ - Plane", aspect = x_domain[end] / z_domain[end])
+    #ax2 = Axis(fig[1, 2], xlabel = "Y Slider", title = "XZ - Plane", aspect = x_domain[end] / z_domain[end])
+    ax2 = Axis(fig[1, 2], xlabel = "Y Slider", title = "XZ - Plane")
     #place the polygon for the current shape in the XZ window
     poly!(xz_vertice_coordinates, color = c)
     #mark the center point for the current shape in the XZ window
@@ -145,7 +147,7 @@ for k = 1:length(geometry)
     text!(string("G",k), color = :black, position = (10,30 * k))
     #set window axis limis
     limits!(ax2, 1, x_domain[end], 1, z_domain[end])
-    
+    """
     #define Axis for YZ window with aspect ratio defined by domain size
     ax3 = Axis(fig[1, 3], xlabel = "Z Slider", title = "YZ - Plane", aspect = y_domain[end] / z_domain[end])
     #place the polygon for the current shape in the YZ window
@@ -154,6 +156,7 @@ for k = 1:length(geometry)
     scatter!(yz_center_coordinates)
     #set window axis limis
     limits!(ax3, 1, y_domain[end], 1, z_domain[end])
+    """
 end 
 
 fig
