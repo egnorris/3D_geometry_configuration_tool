@@ -50,7 +50,7 @@ function rectangle_vertices(x1_coordinate_slider, x2_coordinate_slider, plane, L
             Point2f(x1 - dim1, x2 + dim2)
         ]
     end
-    return vertices
+    return vertices#z_domain = 400:0.01:600
 end
     
 function triangle_vertices(x1_coordinate_slider, x2_coordinate_slider, W, L)
@@ -87,7 +87,6 @@ end
 geometry, config = load_JSON()
 config = config[1]
 x_domain = 0:0.01:config["x_span"]
-#z_domain = 400:0.01:600
 z_domain = 0:0.01:config["z_span"]
 y_domain = 0:0.01:config["y_span"]
 fig = Figure()
@@ -116,8 +115,7 @@ for k = 1:length(geometry)
     c = (:red, 0.5)
     if geometry[k]["material"] == "air"
         c = (:blue, 0.5)
-    end
-    """
+
     #define Axis for XY window with aspect ratio defined by domain size
     ax1 = Axis(fig[1, 1], xlabel = "X Slider", title = "XY - Plane", aspect = x_domain[end] / y_domain[end])
 
@@ -127,7 +125,7 @@ for k = 1:length(geometry)
     scatter!(xy_center_coordinates)
     #set window axis limis
     limits!(ax1, 1, x_domain[end], 1, y_domain[end])
-    """
+
     #define Axis for XZ window with aspect ratio defined by domain size
     #ax2 = Axis(fig[1, 2], xlabel = "Y Slider", title = "XZ - Plane", aspect = x_domain[end] / z_domain[end])
     ax2 = Axis(fig[1, 2], xlabel = "Y Slider", title = "XZ - Plane")
@@ -147,7 +145,7 @@ for k = 1:length(geometry)
     text!(string("G",k), color = :black, position = (10,30 * k))
     #set window axis limis
     limits!(ax2, 1, x_domain[end], 1, z_domain[end])
-    """
+
     #define Axis for YZ window with aspect ratio defined by domain size
     ax3 = Axis(fig[1, 3], xlabel = "Z Slider", title = "YZ - Plane", aspect = y_domain[end] / z_domain[end])
     #place the polygon for the current shape in the YZ window
@@ -156,7 +154,7 @@ for k = 1:length(geometry)
     scatter!(yz_center_coordinates)
     #set window axis limis
     limits!(ax3, 1, y_domain[end], 1, z_domain[end])
-    """
+
 end 
 
 fig
