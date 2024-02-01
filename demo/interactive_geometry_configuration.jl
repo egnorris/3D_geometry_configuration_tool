@@ -1,6 +1,6 @@
-import Pkg
-Pkg.add("GLMakie")
-Pkg.add("JSON")
+#import Pkg
+#Pkg.add("GLMakie")
+#Pkg.add("JSON")
 using GLMakie
 using JSON
 
@@ -110,22 +110,29 @@ for k = 1:length(geometry)
     xy_center_coordinates, xy_vertice_coordinates, X_coordinate_string, Y_coordinate_string = place_shape(x_slider, y_slider, "xy", L/2, W/2, T/2, R, geometry[k]["shape"])
     xz_center_coordinates, xz_vertice_coordinates, _, Z_coordinate_string = place_shape(x_slider, z_slider, "xz", L/2, W/2, T/2, R, geometry[k]["shape"])
     yz_center_coordinates, yz_vertice_coordinates, _, _ = place_shape(y_slider, z_slider, "yz", L/2, W/2, T/2, R, geometry[k]["shape"])
-
+    
     #set the color of the shape based on the material, for now only air gets a different color
     c = (:red, 0.5)
     if geometry[k]["material"] == "air"
-        c = (:blue, 0.5)
-
+        c = (:skyblue, 0.5)
+    elseif geometry[k]["material"] == "gold"
+        c = (:gold, 0.5)
+    elseif geometry[k]["material"] == "chromium"
+        c = (:gray, 0.5)
+    elseif geometry[k]["material"] == "201"
+    	c = (:blue, 0.5)
+    end
     #define Axis for XY window with aspect ratio defined by domain size
     ax1 = Axis(fig[1, 1], xlabel = "X Slider", title = "XY - Plane", aspect = x_domain[end] / y_domain[end])
-
+    
     #place the polygon for the current shape in the XY window
     poly!(xy_vertice_coordinates, color = c)
+    
     #mark the center point for the current shape in the XY window
     scatter!(xy_center_coordinates)
     #set window axis limis
     limits!(ax1, 1, x_domain[end], 1, y_domain[end])
-
+    
     #define Axis for XZ window with aspect ratio defined by domain size
     #ax2 = Axis(fig[1, 2], xlabel = "Y Slider", title = "XZ - Plane", aspect = x_domain[end] / z_domain[end])
     ax2 = Axis(fig[1, 2], xlabel = "Y Slider", title = "XZ - Plane")
@@ -154,6 +161,7 @@ for k = 1:length(geometry)
     scatter!(yz_center_coordinates)
     #set window axis limis
     limits!(ax3, 1, y_domain[end], 1, z_domain[end])
+
 
 end 
 
